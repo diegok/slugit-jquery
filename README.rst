@@ -7,8 +7,7 @@ european utf8 chars plus some symbols and easily extensible for custom extra map
 None of the ones listed on http://plugins.jquery.com/plugin-tags/slug does what I needed.
 
 I got the idea of this plugin after using the excelent perl module Text::Unidecode 
-(http://search.cpan.org/~sburke/Text-Unidecode-0.04/lib/Text/Unidecode.pm) for this
-same task server side. 
+(http://search.cpan.org/dist/Text-Unidecode/) for this same task server side. 
 
 I've taken some chars tables from Django admin urlify.js 
 (http://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js) 
@@ -49,7 +48,7 @@ Or, you can add some extra mappings::
         });
     </script>
 
-...So, "I ♥' my ☂'" will be converted to "i-love-my-umbrella"
+...So, "I ♥ my ☂'" will be converted to "i-love-my-umbrella"
     
 Options
 -------
