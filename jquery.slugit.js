@@ -43,7 +43,7 @@ jQuery.fn.slugIt = function(options) {
             else                         { slug += text.charAt(i) }
 		}
 		
-        slug = slug.replace(/[^-\w\s$\*\,\(\)\'\!\+\.\_]/g, '-');  // remove unneeded chars
+        slug = slug.replace(/[^-\w\s$\*\(\)\'\!\+\_]/g, '-');  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
         slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
 		slug = slug.toLowerCase();
