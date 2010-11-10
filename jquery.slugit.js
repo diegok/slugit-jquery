@@ -46,6 +46,7 @@ jQuery.fn.slugIt = function(options) {
         slug = slug.replace(/[^-\w\s$\*\(\)\'\!\+\_]/g, '-');  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
         slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
+        slug = slug.replace(/-$/, '');         // remove trailing separator
 		slug = slug.toLowerCase();
 		
 		jQuery(opts.output).val(slug);         // input or textarea
