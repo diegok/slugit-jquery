@@ -10,50 +10,50 @@
  */
 
 jQuery.fn.slugIt = function(options) {
-	var defaults = {
- 		events: 'keypress keyup',
-		output: '#slug', 
+    var defaults = {
+        events: 'keypress keyup',
+        output: '#slug', 
         map:    false
-	};
-	
-	var opts  = jQuery.extend(defaults, options);
+    };
+    
+    var opts  = jQuery.extend(defaults, options);
 
-	var chars = latin_map();
-	    chars = jQuery.extend(chars, greek_map());
-	    chars = jQuery.extend(chars, turkish_map());
-	    chars = jQuery.extend(chars, russian_map());
-	    chars = jQuery.extend(chars, ukranian_map());
-	    chars = jQuery.extend(chars, czech_map());
-	    chars = jQuery.extend(chars, latvian_map());
-	    chars = jQuery.extend(chars, polish_map());
-	    chars = jQuery.extend(chars, symbols_map());
-	    chars = jQuery.extend(chars, currency_map());
+    var chars = latin_map();
+        chars = jQuery.extend(chars, greek_map());
+        chars = jQuery.extend(chars, turkish_map());
+        chars = jQuery.extend(chars, russian_map());
+        chars = jQuery.extend(chars, ukranian_map());
+        chars = jQuery.extend(chars, czech_map());
+        chars = jQuery.extend(chars, latvian_map());
+        chars = jQuery.extend(chars, polish_map());
+        chars = jQuery.extend(chars, symbols_map());
+        chars = jQuery.extend(chars, currency_map());
 
     if ( opts.map ) {
-	    chars = jQuery.extend(chars, opts.map);
+        chars = jQuery.extend(chars, opts.map);
     }
 
-	jQuery(this).bind(defaults.events, function() {
-		var text = jQuery(this).val();
-		text = jQuery.trim(text.toString());
-		
-		var slug = new String();
-		for (var i = 0; i < text.length; i++) {
-			if ( chars[text.charAt(i)] ) { slug += chars[text.charAt(i)] }
+    jQuery(this).bind(defaults.events, function() {
+        var text = jQuery(this).val();
+        text = jQuery.trim(text.toString());
+        
+        var slug = new String();
+        for (var i = 0; i < text.length; i++) {
+            if ( chars[text.charAt(i)] ) { slug += chars[text.charAt(i)] }
             else                         { slug += text.charAt(i) }
-		}
-		
+        }
+        
         slug = slug.replace(/[^-\w\s$\*\(\)\'\!\+\_]/g, '-');  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
         slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
         slug = slug.replace(/-$/, '');         // remove trailing separator
-		slug = slug.toLowerCase();
-		
-		jQuery(opts.output).val(slug);         // input or textarea
-		jQuery(opts.output).html(slug);        // other dom elements
-		
-		return this;
-	});
+        slug = slug.toLowerCase();
+        
+        jQuery(opts.output).val(slug);         // input or textarea
+        jQuery(opts.output).html(slug);        // other dom elements
+        
+        return this;
+    });
 
     function latin_map() {
         return {
@@ -152,7 +152,7 @@ jQuery.fn.slugIt = function(options) {
             '©':'(c)', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': '(r)', '†': '+',
             '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm', 
             '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*', 
-            '∆': 'delta', '∞': 'infinity', '♥': 'love'
+            '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and'
         };
     }
 
