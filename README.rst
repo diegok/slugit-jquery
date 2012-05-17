@@ -59,9 +59,13 @@ inerested in customize for your convenience. These are the available options and
     {
         events: 'keypress keyup', // Any sensible jquery event (http://api.jquery.com/category/events/)
         output: '#slug',          // A selector to place the converted result
-        map   : false             // A hash with extra replacemets. 
+        map   : false,            // A hash with extra replacemets. 
                                   // You can overwrite default replacements just passing the
                                   // ones you like to replace.
+        space : '-',              // Character that replaces spaces
+        modify: false             // Callback that will be fired before processing slug
+                                  // It's useful when you need to change the input in some way,
+                                  // for example add some prefix or suffix
     }
 
 Examples
