@@ -13,7 +13,9 @@ jQuery.fn.slugIt = function(options) {
     var defaults = {
         events: 'keypress keyup',
         output: '#slug', 
-        map:    false
+        map:    false,
+        space : '-',
+        modify: false
     };
     
     var opts  = jQuery.extend(defaults, options);
@@ -34,7 +36,7 @@ jQuery.fn.slugIt = function(options) {
     }
 
     jQuery(this).bind(defaults.events, function() {
-        var text = jQuery(this).val();
+        var text = (options.modify) ? options.modify(this) : jQuery(this).val();
         text = jQuery.trim(text.toString());
         
         var slug = new String();
@@ -45,7 +47,7 @@ jQuery.fn.slugIt = function(options) {
         
         slug = slug.replace(/[^-\w\s$\*\(\)\'\!\_]/g, '-');  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
-        slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
+        slug = slug.replace(/[-\s]+/g, options.space);   // convert spaces
         slug = slug.replace(/-$/, '');         // remove trailing separator
         slug = slug.toLowerCase();
         
