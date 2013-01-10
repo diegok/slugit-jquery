@@ -14,10 +14,10 @@ jQuery.fn.slugIt = function(options) {
         events: 'keypress keyup',
         output: '#slug', 
         map:    false,
-        space : '-',
-        modify: false
+        before: false,
+        after: false
     };
-    
+
     var opts  = jQuery.extend(defaults, options);
 
     var chars = latin_map();
@@ -36,24 +36,27 @@ jQuery.fn.slugIt = function(options) {
     }
 
     jQuery(this).bind(defaults.events, function() {
-        var text = (options.modify) ? options.modify(this) : jQuery(this).val();
+        var text = jQuery(this).val();
+        if ( options.before ) text = options.modify(text);
         text = jQuery.trim(text.toString());
-        
+
         var slug = new String();
         for (var i = 0; i < text.length; i++) {
             if ( chars[text.charAt(i)] ) { slug += chars[text.charAt(i)] }
             else                         { slug += text.charAt(i) }
         }
-        
+
         slug = slug.replace(/[^-\w\s$\*\(\)\'\!\_]/g, '-');  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
-        slug = slug.replace(/[-\s]+/g, options.space);   // convert spaces
+        slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
         slug = slug.replace(/-$/, '');         // remove trailing separator
         slug = slug.toLowerCase();
-        
+
+        if ( options.after ) slug = options.after(slug);
+
         jQuery(opts.output).val(slug);         // input or textarea
         jQuery(opts.output).html(slug);        // other dom elements
-        
+
         return this;
     });
 

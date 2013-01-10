@@ -16,9 +16,9 @@ as this one was the most similar aproach to what I was looking to implement over
 Requirements
 ============
 
-Requires JQuery ( I've only tested with 1.4, but should work with previous versions)::
+Requires JQuery (It should work with all version)::
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 Usage
 =====
@@ -59,13 +59,13 @@ inerested in customize for your convenience. These are the available options and
     {
         events: 'keypress keyup', // Any sensible jquery event (http://api.jquery.com/category/events/)
         output: '#slug',          // A selector to place the converted result
+
         map   : false,            // A hash with extra replacemets. 
                                   // You can overwrite default replacements just passing the
                                   // ones you like to replace.
-        space : '-',              // Character that replaces spaces
-        modify: false             // Callback that will be fired before processing slug
-                                  // It's useful when you need to change the input in some way,
-                                  // for example add some prefix or suffix
+
+        before: false             // Callback that will be fired before processing slug (you can modify the input)
+        after : false             // Callback that will be fired after processing slug (You can modify the slug)
     }
 
 Examples
