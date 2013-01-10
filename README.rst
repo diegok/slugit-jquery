@@ -35,7 +35,7 @@ Then, you select the source field to be converted::
     </form>
 
     <script>
-        $(document).ready(function(){
+        $(function(){
             $('#slugme').slugIt();
         });
     </script>
@@ -43,7 +43,7 @@ Then, you select the source field to be converted::
 Or, you can add some extra mappings::
 
     <script>
-        $(document).ready(function(){
+        $(function(){
             $('#slugme').slugIt({ map: { '☂': 'umbrella' } });
         });
     </script>
