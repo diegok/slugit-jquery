@@ -52,7 +52,7 @@ jQuery.fn.slugIt = function(options) {
         slug = slug.replace(/-$/, '');         // remove trailing separator
         slug = slug.toLowerCase();
 
-        if ( options.after ) slug = options.after(slug);
+        if ( opts.after ) slug = opts.after(slug);
 
         if ( typeof opts.output == "function" ) {
           opts.output(slug)
