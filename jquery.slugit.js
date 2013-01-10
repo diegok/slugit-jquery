@@ -54,8 +54,12 @@ jQuery.fn.slugIt = function(options) {
 
         if ( options.after ) slug = options.after(slug);
 
-        jQuery(opts.output).val(slug);         // input or textarea
-        jQuery(opts.output).html(slug);        // other dom elements
+        if ( typeof opts.output == "function" ) {
+          opts.output(slug)
+        } else {
+          jQuery(opts.output).val(slug);         // input or textarea
+          jQuery(opts.output).html(slug);        // other dom elements
+        }
 
         return this;
     });

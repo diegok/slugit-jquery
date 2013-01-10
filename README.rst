@@ -58,7 +58,7 @@ inerested in customize for your convenience. These are the available options and
 
     {
         events: 'keypress keyup', // Any sensible jquery event (http://api.jquery.com/category/events/)
-        output: '#slug',          // A selector to place the converted result
+        output: '#slug',          // A selector or function to send the generated slug
 
         map   : false,            // A hash with extra replacemets. 
                                   // You can overwrite default replacements just passing the
