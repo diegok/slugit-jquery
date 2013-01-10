@@ -37,7 +37,7 @@ jQuery.fn.slugIt = function(options) {
 
     jQuery(this).bind(defaults.events, function() {
         var text = jQuery(this).val();
-        if ( options.before ) text = options.modify(text);
+        if ( opts.before ) text = opts.before(text);
         text = jQuery.trim(text.toString());
 
         var slug = new String();
