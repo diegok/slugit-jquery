@@ -15,7 +15,8 @@ jQuery.fn.slugIt = function(options) {
         output: '#slug', 
         map:    false,
         before: false,
-        after: false
+        after: false,
+        separator: '-'
     };
 
     var opts  = jQuery.extend(defaults, options);
@@ -46,9 +47,9 @@ jQuery.fn.slugIt = function(options) {
             else                         { slug += text.charAt(i) }
         }
 
-        slug = slug.replace(/[^-\w\s$\*\(\)\'\!\_]/g, '-');  // remove unneeded chars
+        slug = slug.replace(/[^-\w\s$\*\(\)\'\!\_]/g, opts.separator);  // remove unneeded chars
         slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
-        slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
+        slug = slug.replace(/[-\s]+/g, opts.separator);   // convert spaces
         slug = slug.replace(/-$/, '');         // remove trailing separator
         slug = slug.toLowerCase();
 
