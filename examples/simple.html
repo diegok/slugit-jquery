@@ -7,13 +7,118 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="../jquery.slugit.js"></script>
         <script>
-            $(function(){ $('#slugme').slugIt( { output: '.slug' } ) });
+            $(function(){
+                $('#slugme1').slugIt({
+                    output: '.slug1'
+                });
+            });
+            $(function(){
+                $('#slugme2').slugIt({
+                    output: '.slug2',
+                    separator: '_',
+                    map: {
+                        '☂': 'umbrella'
+                    }
+                });
+                $('#slugme1, #slugme2').keyup();
+            });
         </script>
+        <style>
+            code {
+                color: #666;
+            }
+            pre {
+                border: 1px dashed #999
+            }
+            span, input {
+                width: 200px
+            }
+        </style>
     </head>
     <body>
-        <input type="text" id="slugme"/>
-        <input type="text" class="slug"/>
-        <p class="slug"></p>
+        <h2>Example with default settings:</h2>
+        <pre>
+            <code>
+$(function(){
+    $('#slugme1').slugIt({
+        output: '.slug1'
+    });
+});
+            </code>
+        </pre>
+        <table>
+            <tr>
+                <td>
+                    <label for="slugme1">Type text:</label>
+                </td>
+                <td>
+                    <input type="text" id="slugme1" value="I love my umbrella">
+                </td>
+                <td>id: slugme1</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Output is here:</label>
+                </td>
+                <td>
+                    <input type="text" class="slug1"/>
+                </td>
+                <td>class: slug1</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>And here:</label>
+                </td>
+                <td>
+                    <span class="slug1"></span>
+                </td>
+                <td>class: slug1</td>
+            </tr>
+        </table>
+        <br /><br />
+        <h2>Example with custom settings:</h2>
+        <pre>
+            <code>
+$(function(){
+    $('#slugme2').slugIt({
+        output: '.slug2',
+        separator: '_',
+        map: {
+            '☂': 'umbrella'
+        }
+    });
+});
+            </code>
+        </pre>
+        <table>
+            <tr>
+                <td>
+                    <label for="slugme2">Type text:</label>
+                </td>
+                <td>
+                    <input type="text" id="slugme2" value="I ♥ my ☂">
+                </td>
+                <td>id: slugme2</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Output is here:</label>
+                </td>
+                <td>
+                    <input type="text" class="slug2"/>
+                </td>
+                <td>class: slug2</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>And here:</label>
+                </td>
+                <td>
+                    <span class="slug2"></span>
+                </td>
+                <td>class: slug2</td>
+            </tr>
+        </table>
     </body>
 </html>
 
