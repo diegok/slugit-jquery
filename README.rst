@@ -39,29 +39,8 @@ Then, you select the source field to be converted::
             $('#slugme').slugIt();
         });
     </script>
+
 "I love my umbrella'" will be converted to "i-love-my-umbrella"
-
-    <form>
-        <input type="text" id="slugme"/>
-        <input type="text" id="slug"/>
-    </form>
-
-    <script>
-        $(function(){
-            $('#slugme').slugIt({ separator: '_' });
-        });
-    </script>
-Now, "I love my umbrella'" will be converted to "i_love_my_umbrella"
-
-You can add some extra mappings::
-
-    <script>
-        $(function(){
-            $('#slugme').slugIt({ map: { '☂': 'umbrella' } });
-        });
-    </script>
-
-...So, "I ♥ my ☂'" will be converted to "i-love-my-umbrella"
 
 Options
 -------
@@ -84,7 +63,28 @@ inerested in customize for your convenience. These are the available options and
 
 Examples
 --------
-Examples can be found at http://github.com/diegok/slugit-jquery/tree/master/examples/
+
+You can add some extra mappings::
+
+    <script>
+        $(function(){
+            $('#slugme').slugIt({ map: { '☂': 'umbrella' } });
+        });
+    </script>
+
+...So, "I ♥ my ☂'" will be converted to "i-love-my-umbrella"
+
+Or customize word separator::
+
+    <script>
+        $(function(){
+            $('#slugme').slugIt({ separator: '_' });
+        });
+    </script>
+
+Now, "I love my umbrella'" will be converted to "i_love_my_umbrella"
+
+Working examples can be found at http://github.com/diegok/slugit-jquery/tree/master/examples/
 
 Licensing
 ---------

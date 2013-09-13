@@ -36,13 +36,8 @@ jQuery.fn.slugIt = function(options) {
         chars = jQuery.extend(chars, opts.map);
     }
 
-    function escapeRegExp(string){
-        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-    }
-
     jQuery(this).bind(defaults.events, function() {
         var text = jQuery(this).val();
-        var regex = '';
 
         if ( opts.before ) text = opts.before(text);
         text = jQuery.trim(text.toString());
@@ -53,13 +48,15 @@ jQuery.fn.slugIt = function(options) {
             else                         { slug += text.charAt(i) }
         }
 
-        slug = slug.replace(/[^-\w\s$\_]/g, opts.separator);  // remove unneeded chars
-        slug = slug.replace(/^\s+$/g, ' '); // trim leading/trailing spaces
-        regex = new RegExp('[' + escapeRegExp(opts.separator)+'\\s]', 'g');
-        slug = slug.replace(regex, opts.separator); // convert spaces to separator
-        regex = new RegExp(escapeRegExp(opts.separator)+'+', 'g');
-        slug = slug.replace(regex, opts.separator); // trim trailing separators
-        slug = slug.toLowerCase(); // convert sting to lower case
+        // Ensure separator is composable into regexes
+        var sep_esc  = opts.separator.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+        var re_trail = new RegExp('^'+ sep_esc +'+|'+ sep_esc +'+$', 'g');
+        var re_multi = new RegExp(sep_esc +'+', 'g');
+
+        slug = slug.replace(/[^-\w\d\$\*\(\)\'\!\_]/g, opts.separator);  // swap spaces and unwanted chars
+        slug = slug.replace(re_trail, '');                               // trim leading/trailing separators
+        slug = slug.replace(re_multi, opts.separator);                   // eliminate repeated separatos
+        slug = slug.toLowerCase();                                       // convert sting to lower case
 
         if ( opts.after ) slug = opts.after(slug);
 
