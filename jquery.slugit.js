@@ -2,7 +2,7 @@
  * jQuery slugIt plug-in 1.0
  *
  * Copyright (c) 2010 Diego Kuperman
- * 
+ *
  * Inspired by perl module Text::Unidecode and Django urlfy.js
  *
  * Licensed under the BSD license:
@@ -12,7 +12,8 @@
 jQuery.fn.slugIt = function(options) {
     var defaults = {
         events: 'keypress keyup',
-        output: '#slug', 
+        output: '#slug',
+        separator: '-',
         map:    false,
         before: false,
         after: false
@@ -35,8 +36,14 @@ jQuery.fn.slugIt = function(options) {
         chars = jQuery.extend(chars, opts.map);
     }
 
+    function escapeRegExp(string){
+        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    }
+
     jQuery(this).bind(defaults.events, function() {
         var text = jQuery(this).val();
+        var regex = '';
+
         if ( opts.before ) text = opts.before(text);
         text = jQuery.trim(text.toString());
 
@@ -46,11 +53,13 @@ jQuery.fn.slugIt = function(options) {
             else                         { slug += text.charAt(i) }
         }
 
-        slug = slug.replace(/[^-\w\s$\*\(\)\'\!\_]/g, '-');  // remove unneeded chars
-        slug = slug.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
-        slug = slug.replace(/[-\s]+/g, '-');   // convert spaces
-        slug = slug.replace(/-$/, '');         // remove trailing separator
-        slug = slug.toLowerCase();
+        slug = slug.replace(/[^-\w\s$\_]/g, opts.separator);  // remove unneeded chars
+        slug = slug.replace(/^\s+$/g, ' '); // trim leading/trailing spaces
+        regex = new RegExp('[' + escapeRegExp(opts.separator)+'\\s]', 'g');
+        slug = slug.replace(regex, opts.separator); // convert spaces to separator
+        regex = new RegExp(escapeRegExp(opts.separator)+'+', 'g');
+        slug = slug.replace(regex, opts.separator); // trim trailing separators
+        slug = slug.toLowerCase(); // convert sting to lower case
 
         if ( opts.after ) slug = opts.after(slug);
 
@@ -144,10 +153,10 @@ jQuery.fn.slugIt = function(options) {
             'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'u', 'Ž':'Z'
         };
     }
-        
+
     function currency_map() {
         return {
-            '€': 'euro', '₢': 'cruzeiro', '₣': 'french franc', '£': 'pound', 
+            '€': 'euro', '$': 'dollar', '₢': 'cruzeiro', '₣': 'french franc', '£': 'pound',
             '₤': 'lira', '₥': 'mill', '₦': 'naira', '₧': 'peseta', '₨': 'rupee',
             '₩': 'won', '₪': 'new shequel', '₫': 'dong', '₭': 'kip', '₮': 'tugrik',
             '₯': 'drachma', '₰': 'penny', '₱': 'peso', '₲': 'guarani', '₳': 'austral',
@@ -159,8 +168,8 @@ jQuery.fn.slugIt = function(options) {
     function symbols_map() {
         return {
             '©':'(c)', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': '(r)', '†': '+',
-            '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm', 
-            '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*', 
+            '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm',
+            '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*',
             '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and'
         };
     }
