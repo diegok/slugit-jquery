@@ -1,0 +1,13 @@
+{
+  "name": "slugit-jquery",
+  "version": "1.0.0",
+  "main": [ "./jquery.slugit.js" ]
+  "ignore": [
+    "**/.*",
+    "examples",
+    "README.rst"
+  ],
+  "dependencies": {
+     "jquery": ">= 1.8.3"
+   }
+}
