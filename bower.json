@@ -1,7 +1,7 @@
 {
   "name": "slugit-jquery",
   "version": "1.0.0",
-  "main": [ "./jquery.slugit.js" ]
+  "main": [ "./jquery.slugit.js" ],
   "ignore": [
     "**/.*",
     "examples",
