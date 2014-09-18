@@ -44,7 +44,7 @@ jQuery.fn.slugIt = function(options) {
 
         var slug = new String();
         for (var i = 0; i < text.length; i++) {
-            if ( chars[text.charAt(i)] ) { slug += chars[text.charAt(i)] }
+            if (typeof chars[text.charAt(i)] !== 'undefined' ) { slug += chars[text.charAt(i)] }
             else                         { slug += text.charAt(i) }
         }
 
