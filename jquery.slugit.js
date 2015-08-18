@@ -53,7 +53,8 @@ jQuery.fn.slugIt = function(options) {
         var re_trail = new RegExp('^'+ sep_esc +'+|'+ sep_esc +'+$', 'g');
         var re_multi = new RegExp(sep_esc +'+', 'g');
 
-        slug = slug.replace(/[^-\w\d\$\*\(\)\'\!\_]/g, opts.separator);  // swap spaces and unwanted chars
+        //slug = slug.replace(/[^-\w\d\$\*\(\)\'\!\_]/g, opts.separator);  // swap spaces and unwanted chars
+        slug = slug.replace(/[^-\u0600-۾\w\d\$\*\(\)\'\!\_]/g, opts.separator);
         slug = slug.replace(re_trail, '');                               // trim leading/trailing separators
         slug = slug.replace(re_multi, opts.separator);                   // eliminate repeated separatos
         slug = slug.toLowerCase();                                       // convert sting to lower case
