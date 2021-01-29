@@ -172,4 +172,4 @@ jQuery.fn.slugIt = function(options) {
     }
 
   return this;
-}
+};
